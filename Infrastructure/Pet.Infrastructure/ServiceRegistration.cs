@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pet.Core.Application_.Repositories;
 using Pet.Infrastructure.Context;
+using Pet.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,7 +24,7 @@ namespace Pet.Infrastructure
                 x.EnableSensitiveDataLogging();
             });         
             services.AddScoped<DbContext, EfDbContext>();
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
