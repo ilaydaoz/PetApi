@@ -1,30 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Pet.Infrastructure.Context;
 using Shared.Pet.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Pet.Core.Application_.Repositories;
 using Shared.Pet.Repositories;
+using System.Linq.Expressions;
 
 namespace Pet.Infrastructure.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T, IContext> : IBaseRepository<T> where T : BaseEntity
     {
         private readonly EfDbContext _context;
+        protected readonly DbSet<T> DbSet;
 
         public BaseRepository(EfDbContext context)
         {
             _context = context;
-        }
-        public async Task<bool> AddAsync(T entity)
-        {
-            EntityEntry<T> entityEntry = await _context.AddAsync(entity);
-            return entityEntry.State == EntityState.Added;
+            DbSet = _context.Set<T>();
         }
 
         public bool Delete(T entity)
@@ -37,10 +28,6 @@ namespace Pet.Infrastructure.Repositories
             _context.RemoveRange(entity);
             return true;
         }
-        public IQueryable<T> GetAll()
-        {
-            return _context.Set<T>();
-        }
 
         public async Task<T> GetByIdAsync(Guid id)
         {
@@ -52,11 +39,6 @@ namespace Pet.Infrastructure.Repositories
             return await _context.Set<T>().FirstOrDefaultAsync(filter);
         }
 
-        public bool Update(T entity)
-        {
-            EntityEntry<T> entityEntry = _context.Update(entity);
-            return entityEntry.State == EntityState.Modified;
-        }
         public async Task<int> SaveAsync()
         {
             return await _context.SaveChangesAsync();
@@ -67,5 +49,21 @@ namespace Pet.Infrastructure.Repositories
             return _context.Set<T>().Where(filter).ToList();
         }
 
+        public async Task<Guid> UpdateAsync(T entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            return entity.Id;
+        }
+
+        public async Task<T> InsertAsync(T entity)
+        {
+            DbSet.Add(entity);
+            return entity;
+        }
+
+        public Task<List<T>> GetAllAsync()
+        {
+            return _context.Set<T>().ToListAsync();
+        }
     }
 }

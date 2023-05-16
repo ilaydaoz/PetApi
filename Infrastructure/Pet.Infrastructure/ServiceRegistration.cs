@@ -4,12 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Pet.Core.Application_.Repositories;
 using Pet.Infrastructure.Context;
 using Pet.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pet.Infrastructure
 {
