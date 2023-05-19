@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Pet.Core.Domain.Entities;
+using Shared.Pet.Entity;
 
 namespace Pet.Infrastructure.Context
 {
@@ -14,7 +16,6 @@ namespace Pet.Infrastructure.Context
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
             modelBuilder.HasPostgresExtension("uuid-ossp").Entity<User>().Property(a => a.Id).HasDefaultValueSql("uuid_generate_v4()").ValueGeneratedOnAdd();
         }
     }
