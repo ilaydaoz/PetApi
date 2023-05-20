@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.Core.Domain.Entities
 {
-   // [Table("User", Schema = "Pet")]
     public class User : BaseEntity
     {
         public string Name { get; set; }

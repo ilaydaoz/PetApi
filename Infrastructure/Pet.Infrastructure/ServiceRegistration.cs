@@ -20,6 +20,7 @@ namespace Pet.Infrastructure
             });         
             services.AddScoped<DbContext, EfDbContext>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }
 }
