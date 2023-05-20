@@ -12,8 +12,8 @@ using Pet.Infrastructure.Context;
 namespace Pet.Infrastructure.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20230520142843_mig_1")]
-    partial class mig_1
+    [Migration("20230520171631_mig_2")]
+    partial class mig_2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,10 +49,15 @@ namespace Pet.Infrastructure.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("ParentId1")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId1");
 
                     b.ToTable("Categories");
                 });
@@ -95,6 +100,22 @@ namespace Pet.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Pet.Core.Domain.Entities.Category", b =>
+                {
+                    b.HasOne("Pet.Core.Domain.Entities.Category", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("Pet.Core.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }
