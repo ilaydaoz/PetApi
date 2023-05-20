@@ -46,7 +46,7 @@ namespace Pet.Infrastructure.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ParentId1")
+                    b.Property<Guid>("SubCategoryId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -54,7 +54,7 @@ namespace Pet.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId1");
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Categories");
                 });
@@ -101,13 +101,13 @@ namespace Pet.Infrastructure.Migrations
 
             modelBuilder.Entity("Pet.Core.Domain.Entities.Category", b =>
                 {
-                    b.HasOne("Pet.Core.Domain.Entities.Category", "Parent")
+                    b.HasOne("Pet.Core.Domain.Entities.Category", "SubCategory")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId1")
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Parent");
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("Pet.Core.Domain.Entities.Category", b =>

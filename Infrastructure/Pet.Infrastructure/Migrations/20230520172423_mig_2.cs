@@ -21,7 +21,7 @@ namespace Pet.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Name = table.Column<string>(type: "text", nullable: false),
                     ParentId = table.Column<int>(type: "integer", nullable: true),
-                    ParentId1 = table.Column<Guid>(type: "uuid", nullable: false),
+                    SubCategoryId = table.Column<Guid>(type: "uuid", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -31,8 +31,8 @@ namespace Pet.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Categories_ParentId1",
-                        column: x => x.ParentId1,
+                        name: "FK_Categories_Categories_SubCategoryId",
+                        column: x => x.SubCategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -58,9 +58,9 @@ namespace Pet.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ParentId1",
+                name: "IX_Categories_SubCategoryId",
                 table: "Categories",
-                column: "ParentId1");
+                column: "SubCategoryId");
         }
 
         /// <inheritdoc />
