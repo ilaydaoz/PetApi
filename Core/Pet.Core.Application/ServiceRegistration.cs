@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Pet.Core.Application_
+namespace Pet.Core.Application
 {
     public static class ServiceRegistration
     {

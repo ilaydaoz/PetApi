@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Pet.Core.Application_.Repositories;
+using Pet.Core.Application.Repositories;
 using Pet.Core.Domain.Entities;
 using Shared.Pet.Hashing;
 
-namespace Pet.Core.Application_.Services.Commands.Insert.Users.Register
+namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
 {
     public class UserInsertCommandHandler : IRequestHandler<UserInsertCommandRequestModel, UserInsertCommandResponse>
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pet.Core.Application_.Repositories;
+using Pet.Core.Application.Repositories;
 using Pet.Infrastructure.Context;
 using Pet.Infrastructure.Repositories;
 using System.Diagnostics;

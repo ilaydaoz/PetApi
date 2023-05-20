@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Pet.Core.Application_.Services.Commands.Insert.Users.Register;
+using Pet.Core.Application.Services.Commands.Insert.Users.Register;
 using Shared.Pet.Controllers;
 
 namespace Pet.Presentation.Api.Controllers

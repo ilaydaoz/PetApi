@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Pet.Core.Application_.Services.Commands.Insert.Users.Register
+namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
 {
     public class UserInsertCommandRequestModel : IRequest<UserInsertCommandResponse>
     {

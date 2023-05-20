@@ -1,4 +1,4 @@
-using Pet.Core.Application_;
+using Pet.Core.Application;
 using Pet.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
