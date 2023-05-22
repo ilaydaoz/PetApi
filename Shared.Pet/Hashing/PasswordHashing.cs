@@ -2,7 +2,7 @@
 
 namespace Shared.Pet.Hashing
 {
-    public class PasswordHashing
+    public class PasswordHashing 
     {
         private const int SaltSize = 32;
         private const int HashSize = 32;

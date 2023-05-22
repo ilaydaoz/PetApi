@@ -12,8 +12,8 @@ using Pet.Infrastructure.Context;
 namespace Pet.Infrastructure.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20230520172423_mig_2")]
-    partial class mig_2
+    [Migration("20230522155114_mig_5")]
+    partial class mig_5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,10 @@ namespace Pet.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("text");
 

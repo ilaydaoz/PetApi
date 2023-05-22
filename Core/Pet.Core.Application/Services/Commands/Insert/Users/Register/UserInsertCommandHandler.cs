@@ -17,9 +17,11 @@ namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
         }
         public async Task<UserInsertCommandResponse> Handle(UserInsertCommandRequestModel request, CancellationToken cancellationToken)
         {
-            string hashedPassword = PasswordHashing.HashingHelper(request.Password, out string salt);
+            string salt;
+            string hashedPassword = PasswordHashing.HashingHelper(request.Password, out salt);
             var user = _mapper.Map<User>(request);
             user.Password = hashedPassword;
+            user.PasswordSalt= salt; 
             var userAdd = await _userRepository.InsertAsync(user);
             await _userRepository.SaveAsync();
             var userMap = _mapper.Map<UserInsertCommandResponse>(userAdd);
