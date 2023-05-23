@@ -4,8 +4,6 @@ using MediatR;
 using Pet.Core.Application.Repositories;
 using Pet.Core.Domain.Entities;
 using Shared.Pet.Hashing;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
 {
