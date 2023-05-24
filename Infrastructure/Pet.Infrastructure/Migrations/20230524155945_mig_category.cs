@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Pet.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_2 : Migration
+    public partial class mig_category : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,8 @@ namespace Pet.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ParentId = table.Column<int>(type: "integer", nullable: true),
-                    SubCategoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ParentId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ParentCategoryId = table.Column<Guid>(type: "uuid", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -31,11 +31,10 @@ namespace Pet.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Categories_SubCategoryId",
-                        column: x => x.SubCategoryId,
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -58,9 +57,9 @@ namespace Pet.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_SubCategoryId",
+                name: "IX_Categories_ParentCategoryId",
                 table: "Categories",
-                column: "SubCategoryId");
+                column: "ParentCategoryId");
         }
 
         /// <inheritdoc />
