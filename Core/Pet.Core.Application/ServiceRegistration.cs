@@ -18,15 +18,6 @@ namespace Pet.Core.Application
                           .Where(consumer => consumer.FullName != null && consumer.FullName.Contains("Handler") && consumer.IsClass)
                           .ToArray();
             services.AddMediatR(assembly);
-
-            services.AddControllersWithViews()
-                 .AddFluentValidation(opt =>
-                 {
-                     opt.RegisterValidatorsFromAssemblyContaining<InsertRegistrationValidator>();
-                     opt.DisableDataAnnotationsValidation = true;
-                     opt.ValidatorOptions.LanguageManager.Culture = new CultureInfo("tr");
-                 });
-            
             return services;
         }
     }

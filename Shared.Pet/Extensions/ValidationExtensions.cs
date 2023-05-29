@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Shared.Pet.Extensions
