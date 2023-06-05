@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pet.Core.Application.Services.Commands.Insert.Users.Login
+namespace Shared.Pet.Entity
 {
-    public class LoginUserCommandResponse
+    public class AuthModel
     {
         public string Email { get; set; }
-        public string NickName { get; set; }
         public string Password { get; set; }
-        public string Token { get; set; }
     }
 }

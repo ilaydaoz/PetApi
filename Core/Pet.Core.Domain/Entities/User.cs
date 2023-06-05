@@ -1,5 +1,4 @@
 ﻿using Shared.Pet.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.Core.Domain.Entities
 {
@@ -10,5 +9,7 @@ namespace Pet.Core.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string PasswordSalt { get; set; }
+        public string? Token { get; set; }
+
     }
 }

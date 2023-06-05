@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Pet.Core.Application;
 using Pet.Core.Application.Validation.User;
 using Pet.Infrastructure;
+using Shared.Pet.Middleware;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddSingleton<JWTAuthenticationMiddleware>();
 
 var app = builder.Build();
 

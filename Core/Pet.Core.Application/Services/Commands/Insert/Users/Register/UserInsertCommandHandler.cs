@@ -4,6 +4,7 @@ using MediatR;
 using Pet.Core.Application.Repositories;
 using Pet.Core.Domain.Entities;
 using Shared.Pet.Hashing;
+using Shared.Pet.Middleware;
 
 namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
 {
@@ -12,12 +13,14 @@ namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IValidator<UserInsertCommandRequestModel> _validator;
+        private readonly JWTAuthenticationMiddleware _jwtAuthenticationMiddleware;
 
-        public UserInsertCommandHandler(IUserRepository userRepository, IMapper mapper, IValidator<UserInsertCommandRequestModel> validator)
+        public UserInsertCommandHandler(IUserRepository userRepository, IMapper mapper, IValidator<UserInsertCommandRequestModel> validator, JWTAuthenticationMiddleware jwtAuthenticationMiddleware)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _validator = validator;
+            _jwtAuthenticationMiddleware = jwtAuthenticationMiddleware;
         }
 
         public async Task<UserInsertCommandResponse> Handle(UserInsertCommandRequestModel request, CancellationToken cancellationToken)
@@ -35,9 +38,15 @@ namespace Pet.Core.Application.Services.Commands.Insert.Users.Register
                 throw new ValidationException(validationResult.Errors);
             }
 
-            await _userRepository.SaveAsync();
+           
             var userMap = _mapper.Map<UserInsertCommandResponse>(userAdd);
+
+            
+            string token = _jwtAuthenticationMiddleware.GenerateJwtToken(user.Id.ToString(), user.Name);
+            userMap.Token = token;
+ await _userRepository.SaveAsync();
             return userMap;
         }
     }
+
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Pet.Core.Domain.Entities;
-using Shared.Pet.Entity;
 
 namespace Pet.Infrastructure.Context
 {

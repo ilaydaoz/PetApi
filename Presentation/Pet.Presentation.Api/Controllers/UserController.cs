@@ -12,11 +12,11 @@ namespace Pet.Presentation.Api.Controllers
         {
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Register([FromBody] LoginUserCommandRequestModel request) =>
        Ok(await _mediator.Send(request));
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserInsertCommandRequestModel request) =>
            Ok(await _mediator.Send(request));
 

@@ -10,6 +10,9 @@ namespace Pet.Core.Application.Services.Commands.Insert.Users.Login
     public class LoginUserCommandRequestModel : IRequest<LoginUserCommandResponse>
     {
         public string Email { get; set; }
+        public string NickName { get; set; }
         public string Password { get; set; }
+        public string Token { get; set; }
+
     }
 }
